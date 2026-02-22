@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
@@ -27,8 +28,14 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
     public void onAuthenticationSuccess(HttpServletRequest request,
                                         HttpServletResponse response,
                                         Authentication authentication) throws IOException {
-        OidcUser oidcUser = (OidcUser) authentication.getPrincipal();
-        String providerId = oidcUser.getSubject();
+        OAuth2User principal = (OAuth2User) authentication.getPrincipal();
+
+        String providerId;
+        if (principal instanceof OidcUser oidcUser) {
+            providerId = oidcUser.getSubject();
+        } else {
+            providerId = (String) principal.getAttributes().get("sub");
+        }
 
         Long userId = oAuth2UserService.findUserIdByProviderId("google", providerId);
         String token = jwtProvider.generateToken(userId);
