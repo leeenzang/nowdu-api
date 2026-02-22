@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalTime;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Getter
 @Builder
@@ -15,6 +16,8 @@ public class TimetableResponse {
     private Long id;
     private String title;
     private String memo;
+
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime startTime;
 
     public static TimetableResponse fromRoutine(Routine routine) {
