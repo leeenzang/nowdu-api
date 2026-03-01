@@ -1,5 +1,6 @@
 package com.tauceti.nowdu.routine.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.tauceti.nowdu.routine.domain.Routine;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,8 +14,8 @@ public class RoutineResponse {
     private Long id;
     private String title;
     private String memo;
-    private LocalTime startTime;
-    private boolean mon;
+    @JsonFormat(pattern = "HH:mm")
+    private LocalTime startTime;    private boolean mon;
     private boolean tue;
     private boolean wed;
     private boolean thu;
