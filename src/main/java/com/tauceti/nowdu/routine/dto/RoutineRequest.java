@@ -17,6 +17,8 @@ public class RoutineRequest {
     @NotNull(message = "시작 시간을 입력해주세요.")
     private LocalTime startTime;
 
+    private LocalTime endTime; // optional
+
     private boolean mon;
     private boolean tue;
     private boolean wed;

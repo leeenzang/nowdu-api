@@ -1,5 +1,6 @@
 package com.tauceti.nowdu.event.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.tauceti.nowdu.event.domain.Event;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,7 +16,14 @@ public class EventResponse {
     private String title;
     private String memo;
     private LocalDate eventDate;
+
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime startTime;
+
+    @JsonFormat(pattern = "HH:mm")
+    private LocalTime endTime;
+
+    private boolean isDone;
 
     public static EventResponse from(Event event) {
         return EventResponse.builder()
@@ -24,6 +32,8 @@ public class EventResponse {
                 .memo(event.getMemo())
                 .eventDate(event.getEventDate())
                 .startTime(event.getStartTime())
+                .endTime(event.getEndTime())
+                .isDone(event.isDone())
                 .build();
     }
 }

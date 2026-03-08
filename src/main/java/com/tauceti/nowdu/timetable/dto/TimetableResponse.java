@@ -20,6 +20,11 @@ public class TimetableResponse {
     @JsonFormat(pattern = "HH:mm")
     private LocalTime startTime;
 
+    @JsonFormat(pattern = "HH:mm")
+    private LocalTime endTime;
+
+    private Boolean isDone; // event만 사용, routine은 null
+
     public static TimetableResponse fromRoutine(Routine routine) {
         return TimetableResponse.builder()
                 .type("routine")
@@ -27,6 +32,8 @@ public class TimetableResponse {
                 .title(routine.getTitle())
                 .memo(routine.getMemo())
                 .startTime(routine.getStartTime())
+                .endTime(routine.getEndTime())
+                .isDone(null)
                 .build();
     }
 
@@ -37,6 +44,8 @@ public class TimetableResponse {
                 .title(event.getTitle())
                 .memo(event.getMemo())
                 .startTime(event.getStartTime())
+                .endTime(event.getEndTime())
+                .isDone(event.isDone())
                 .build();
     }
 }

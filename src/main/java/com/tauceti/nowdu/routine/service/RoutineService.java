@@ -36,6 +36,7 @@ public class RoutineService {
                 .title(request.getTitle())
                 .memo(request.getMemo())
                 .startTime(request.getStartTime())
+                .endTime(request.getEndTime())
                 .mon(request.isMon())
                 .tue(request.isTue())
                 .wed(request.isWed())
@@ -58,6 +59,7 @@ public class RoutineService {
                 request.getTitle(),
                 request.getMemo(),
                 request.getStartTime(),
+                request.getEndTime(),
                 request.isMon(), request.isTue(), request.isWed(),
                 request.isThu(), request.isFri(), request.isSat(), request.isSun()
         );

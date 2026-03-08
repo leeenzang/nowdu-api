@@ -57,4 +57,12 @@ public class EventController {
         eventService.deleteEvent(user, eventId);
         return ResponseEntity.noContent().build();
     }
+
+    @Operation(summary = "일정 완료 토글")
+    @PatchMapping("/{eventId}/done")
+    public ResponseEntity<EventResponse> toggleDone(
+            @AuthenticationPrincipal User user,
+            @PathVariable Long eventId) {
+        return ResponseEntity.ok(eventService.toggleDone(user, eventId));
+    }
 }
