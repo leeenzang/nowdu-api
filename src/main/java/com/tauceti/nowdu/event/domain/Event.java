@@ -35,6 +35,12 @@ public class Event {
     @Column(nullable = false)
     private LocalTime startTime;
 
+    private LocalTime endTime; // optional
+
+    @Column(nullable = false)
+    @Builder.Default
+    private boolean isDone = false;
+
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -50,10 +56,15 @@ public class Event {
         this.updatedAt = LocalDateTime.now();
     }
 
-    public void update(String title, String memo, LocalDate eventDate, LocalTime startTime) {
+    public void toggleDone() {
+        this.isDone = !this.isDone;
+    }
+
+    public void update(String title, String memo, LocalDate eventDate, LocalTime startTime, LocalTime endTime) {
         this.title = title;
         this.memo = memo;
         this.eventDate = eventDate;
         this.startTime = startTime;
+        this.endTime = endTime;
     }
 }

@@ -20,4 +20,6 @@ public class EventRequest {
 
     @NotNull(message = "시작 시간을 입력해주세요.")
     private LocalTime startTime;
+
+    private LocalTime endTime; // optional
 }

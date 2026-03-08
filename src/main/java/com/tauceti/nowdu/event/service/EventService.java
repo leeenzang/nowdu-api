@@ -38,6 +38,7 @@ public class EventService {
                 .memo(request.getMemo())
                 .eventDate(request.getEventDate())
                 .startTime(request.getStartTime())
+                .endTime(request.getEndTime())
                 .build();
 
         return EventResponse.from(eventRepository.save(event));
@@ -50,7 +51,7 @@ public class EventService {
                 .orElseThrow(() -> new BusinessException(ErrorCode.EVENT_NOT_FOUND));
 
         event.update(request.getTitle(), request.getMemo(),
-                request.getEventDate(), request.getStartTime());
+                request.getEventDate(), request.getStartTime(), request.getEndTime());
 
         return EventResponse.from(event);
     }
@@ -62,5 +63,16 @@ public class EventService {
                 .orElseThrow(() -> new BusinessException(ErrorCode.EVENT_NOT_FOUND));
 
         eventRepository.delete(event);
+    }
+
+    // 일정 완료 토글
+    @Transactional
+    public EventResponse toggleDone(User user, Long eventId) {
+        Event event = eventRepository.findByIdAndUserId(eventId, user.getId())
+                .orElseThrow(() -> new BusinessException(ErrorCode.EVENT_NOT_FOUND));
+
+        event.toggleDone();
+
+        return EventResponse.from(event);
     }
 }

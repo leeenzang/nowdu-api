@@ -31,6 +31,8 @@ public class Routine {
     @Column(nullable = false)
     private LocalTime startTime;
 
+    private LocalTime endTime; // optional
+
     @Column(nullable = false)
     private boolean mon;
     @Column(nullable = false)
@@ -61,12 +63,13 @@ public class Routine {
         this.updatedAt = LocalDateTime.now();
     }
 
-    public void update(String title, String memo, LocalTime startTime,
+    public void update(String title, String memo, LocalTime startTime, LocalTime endTime,
                        boolean mon, boolean tue, boolean wed,
                        boolean thu, boolean fri, boolean sat, boolean sun) {
         this.title = title;
         this.memo = memo;
         this.startTime = startTime;
+        this.endTime = endTime;
         this.mon = mon;
         this.tue = tue;
         this.wed = wed;

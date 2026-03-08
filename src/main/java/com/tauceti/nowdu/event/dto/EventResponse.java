@@ -16,8 +16,15 @@ public class EventResponse {
     private String title;
     private String memo;
     private LocalDate eventDate;
+
     @JsonFormat(pattern = "HH:mm")
     private LocalTime startTime;
+
+    @JsonFormat(pattern = "HH:mm")
+    private LocalTime endTime;
+
+    private boolean isDone;
+
     public static EventResponse from(Event event) {
         return EventResponse.builder()
                 .id(event.getId())
@@ -25,6 +32,8 @@ public class EventResponse {
                 .memo(event.getMemo())
                 .eventDate(event.getEventDate())
                 .startTime(event.getStartTime())
+                .endTime(event.getEndTime())
+                .isDone(event.isDone())
                 .build();
     }
 }

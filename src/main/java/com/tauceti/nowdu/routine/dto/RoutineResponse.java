@@ -14,8 +14,14 @@ public class RoutineResponse {
     private Long id;
     private String title;
     private String memo;
+
     @JsonFormat(pattern = "HH:mm")
-    private LocalTime startTime;    private boolean mon;
+    private LocalTime startTime;
+
+    @JsonFormat(pattern = "HH:mm")
+    private LocalTime endTime;
+
+    private boolean mon;
     private boolean tue;
     private boolean wed;
     private boolean thu;
@@ -29,6 +35,7 @@ public class RoutineResponse {
                 .title(routine.getTitle())
                 .memo(routine.getMemo())
                 .startTime(routine.getStartTime())
+                .endTime(routine.getEndTime())
                 .mon(routine.isMon())
                 .tue(routine.isTue())
                 .wed(routine.isWed())
